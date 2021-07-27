@@ -1,4 +1,5 @@
-import logoSvg from './assets/img/pizza-logo.svg'
+import logoSvg from '../assets/img/pizza-logo.svg'
+import Button from './Button'
 
 function Header() {
   return (
@@ -11,8 +12,9 @@ function Header() {
             <p>самая вкусная пицца во вселенной</p>
           </div>
         </div>
+
         <div className='header__cart'>
-          <a href='/cart.html' className='button button--cart'>
+          <Button className='button--cart'>
             <span>520 ₽</span>
             <div className='button__delimiter'></div>
             <svg
@@ -45,7 +47,7 @@ function Header() {
               />
             </svg>
             <span>3</span>
-          </a>
+          </Button>
         </div>
       </div>
     </div>
