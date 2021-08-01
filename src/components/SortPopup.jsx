@@ -1,6 +1,7 @@
+import React from 'react'
 import { useState, useEffect, useRef } from 'react'
 
-const SortPopup = ({ items }) => {
+const SortPopup = React.memo(function SortPopup({ items }) {
   const [visiblePopup, setVisiblePopup] = useState(false)
   const [activeItem, setActiveItem] = useState(0)
 
@@ -62,5 +63,5 @@ const SortPopup = ({ items }) => {
       )}
     </div>
   )
-}
+})
 export default SortPopup
