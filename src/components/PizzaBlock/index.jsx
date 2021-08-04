@@ -2,10 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import classNames from 'classnames'
+import Button from '../Button'
 
-function PizzaBlock({ name, imageUrl, price, types, sizes }) {
+function PizzaBlock({
+  id,
+  name,
+  imageUrl,
+  price,
+  types,
+  sizes,
+  onClickAddPizza,
+  addedCount,
+}) {
   const [activeType, setActiveType] = useState(types[0])
-  const [activeSize, setActiveSize] = useState(sizes[0])
+  const [activeSize, setActiveSize] = useState(0)
   const onSelectType = index => {
     setActiveType(index)
   }
@@ -14,6 +24,19 @@ function PizzaBlock({ name, imageUrl, price, types, sizes }) {
   }
   const avilableTypes = ['тонкое', 'традиционное']
   const avilableSizes = [26, 30, 40]
+
+  const onAddPizza = () => {
+    const obj = {
+      id,
+      name,
+      imageUrl,
+      price,
+      size: avilableSizes[activeSize],
+      type: avilableTypes[activeType],
+    }
+    onClickAddPizza(obj)
+  }
+
   return (
     <div className='pizza-block'>
       <img className='pizza-block__image' src={imageUrl} alt='Pizza' />
@@ -50,7 +73,7 @@ function PizzaBlock({ name, imageUrl, price, types, sizes }) {
       </div>
       <div className='pizza-block__bottom'>
         <div className='pizza-block__price'>{price} Br</div>
-        <div className='button button--outline button--add'>
+        <Button onClick={onAddPizza} className='button--add' outline>
           <svg
             width='12'
             height='12'
@@ -64,8 +87,8 @@ function PizzaBlock({ name, imageUrl, price, types, sizes }) {
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
-        </div>
+          {addedCount && <i>{addedCount}</i>}
+        </Button>
       </div>
     </div>
   )
@@ -77,6 +100,8 @@ PizzaBlock.propTypes = {
   price: PropTypes.number,
   types: PropTypes.arrayOf(PropTypes.number),
   sizes: PropTypes.arrayOf(PropTypes.number),
+  onClickAddPizza: PropTypes.func,
+  addedCount: PropTypes.number,
 }
 
 PizzaBlock.defaultProps = {
